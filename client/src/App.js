@@ -2,14 +2,17 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css'
 
-// Páginas
+// Pages
 import AdminLogin from './components/pages/AdminLogin';
 import Home from './components/pages/Home';
 import Contato from './components/pages/Contato';
 
+// For setting up context
+import AuthState from './context/auth/authState';
+
 function App() {
   return (
-    <div className="App">
+    <AuthState>
       <Router>
         <Switch>
           <Route component={Contato} exact path="/contato" />
@@ -17,7 +20,7 @@ function App() {
           <Route component={Home} exact path="/" />
         </Switch>
       </Router>
-    </div>
+    </AuthState>
   );
 }
 
