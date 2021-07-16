@@ -1,0 +1,17 @@
+{
+  "name": "despair-fansub",
+  "version": "1.0.0",
+  "description": "Site da Despair Fansub.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "author": "Salieri",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
