@@ -1,9 +1,20 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
+import AuthContext from '../../context/auth/authContext';
 
 const Home = () => {
+    const authContext = useContext(AuthContext);
+
+    const {loadAdmin, loading, isAuthenticated} = authContext;
+
+    useEffect(() =>{
+        loadAdmin();
+        
+        // eslint-disable-next-line
+    }, []);
+
     return(
         <Fragment>
             <Navbar />
@@ -13,6 +24,7 @@ const Home = () => {
                         <div className="main-header">
                             <div className="main-header-text">
                                 <h2>Novas Postagens</h2>
+                                {(!loading && isAuthenticated) ? (<Link to='/novopost' className="btn">Criar Post</Link>) : <span></span>}
                             </div>
                         </div>
                         <div className="posts-grid">

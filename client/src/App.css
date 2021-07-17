@@ -2,6 +2,7 @@
 
 :root {
   --palette-red1: rgb(212, 21, 53);
+  --palete-green1: rgb(0, 128, 0);
   --palette-black1: #000;
   --palette-black2: rgb(68, 68, 68);
   --palette-black3: rgb(32, 32, 32);
@@ -114,7 +115,7 @@ a {
   align-items: center;
   flex-direction: column;
   min-width: 12rem;
-  z-index: 1;
+  z-index: 2;
   margin-left: 10px;
 }
 
@@ -150,13 +151,6 @@ a {
 
 /* Login */
 
-#admin-login .form-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1.4rem;
-  color: var(--palette-white1);
-  font-weight: 0;
-}
-
 #admin-login .form-card {
   width: 25%;
 }
@@ -172,14 +166,6 @@ a {
 }
 
 /* Contato */
-
-#contato .form-card h3 {
-  color: var(--palette-white1);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  border-bottom: 3px solid var(--palette-red1);
-  font-weight: 0;
-}
 
 .contact-form {
   width: 90%;
@@ -228,14 +214,25 @@ a {
   width: 100%;
   margin: 0 auto;
   padding: 2px 0;
-  border-bottom: 3px solid var(--palette-red1);
+  border-bottom: 3.5px solid var(--palette-red1);
   border-radius: 6px;
+  align-items: center;
 }
 
 .main-header h2 {
+  display: inline-block;
   margin-left: 1rem;
   color: var(--palette-white1);
   font-weight: 0;
+}
+
+.main-header .btn {
+  font-size: 1rem;
+  float: right;
+  margin-right: 1rem;
+  margin-top: 2px;
+  background-color: var(--palete-green1);
+  color: var(--palette-white1);
 }
 
 .sidebar-header {
@@ -322,6 +319,49 @@ a {
   float: right;
 }
 
+/* Criação de Post */
+
+#novo-post .form-card {
+  width: 50%;
+  margin-top: 2rem;
+}
+
+.newpost-form {
+  text-align: left;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.newpost-form label {
+  color: var(--palette-white1);
+}
+
+.newpost-form .form-item {
+  width: 95%;
+  margin: 1rem auto;
+}
+
+.newpost-form .form-item .form-input {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.newpost-form .form-item textarea {
+  min-height: 30vh;
+}
+
+.newpost-form .form-submit {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.newpost-form .form-submit .btn {
+  padding: 6px 0;
+  width: 25%;
+}
+
 /* Helpers */
 
 .btn {
@@ -339,9 +379,9 @@ a {
 }
 
 .form-card {
-  background-color: var(--palette-black2);
+  background-color: var(--palette-black1);
   width: 40%;
-  margin: 5rem auto;
+  margin: 4rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -351,12 +391,31 @@ a {
   border-radius: 3px;
 }
 
+.form-card h3 {
+  color: var(--palette-white1);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid var(--palette-red1);
+  font-weight: 0;
+}
+
 .form-input {
   display: block;
   border: none;
   border-radius: 5px;
   padding: 13px;
   margin-bottom: 20px;
+}
+
+.form-file-item label {
+  display: inline-block;
+  border: 2px solid var(--palette-red1);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.form-file-item input {
+  display: none;
 }
 
 .error-msg {
