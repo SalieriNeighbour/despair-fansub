@@ -38,7 +38,7 @@ router.post('/', auth, async (req, res) => {
     try {
         const {title, content, img, tags, author} = req.body;
 
-        if (title === '' || content === '' || img === '' || tags === '' || !author){
+        if (title === '' || content === '' || img === '' || tags === '' || !author || img.match(/\.(jpeg|jpg|png)$/) == null){
             return res.status(400).send("Post inválido.");
         }
 
@@ -74,7 +74,7 @@ router.put('/:post_id', auth, async (req, res) => {
     try {
         const {title, content, img, tags, author} = req.body;
 
-        if (title === '' || content === '' || img === '' || tags === '' || !author){
+        if (title === '' || content === '' || img === '' || tags === '' || !author || img.match(/\.(jpeg|jpg|png)$/) == null){
             return res.status(400).send("Post inválido.");
         }
 
@@ -121,7 +121,7 @@ router.put('/:post_id', auth, async (req, res) => {
 
 // Delete Post
 // Private
-router.delete('/:post_id', async (req, res) => {
+router.delete('/:post_id', auth, async (req, res) => {
     try {
         const post = await Post.findOneAndDelete({_id: req.params.post_id});
 

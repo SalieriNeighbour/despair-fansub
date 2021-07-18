@@ -4,6 +4,7 @@ import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import AuthContext from '../../context/auth/authContext';
 import PostContext from '../../context/post/postContext';
+import TagsContext from '../../context/tags/tagsContext';
 
 import Spinner from '../img/spinner.gif';
 
@@ -11,19 +12,23 @@ import Spinner from '../img/spinner.gif';
 const Home = () => {
     const authContext = useContext(AuthContext);
     const postContext = useContext(PostContext);
+    const tagsContext = useContext(TagsContext);
 
     const {loadAdmin, loading, isAuthenticated} = authContext;
     const {posts, loading: loading_posts, loadPosts, preSetPostInfo} = postContext;
+    const {tags, loading: loading_tags, loadTags, preSetTagInfo, setLoading} = tagsContext;
 
     useEffect(() =>{
         loadAdmin();
+        loadTags();
         // eslint-disable-next-line
     }, [posts]);
 
     useEffect(() => {
-        loadPosts()
+        loadPosts();
+        loadTags();
         // eslint-disable-next-line
-    }, [])
+    }, [loading_posts, loading_tags])
 
     const formatDate = date => {
         date = new Date(date);
@@ -51,7 +56,12 @@ const Home = () => {
         return style;
     };
 
-    const onClick = idx => preSetPostInfo(posts[idx])
+    const onClickPost = idx => preSetPostInfo(posts[idx]);
+    
+    const onClickTag = idx => {
+        preSetTagInfo(tags[idx]);
+        setLoading();
+    }
 
     return(
         <Fragment>
@@ -65,9 +75,9 @@ const Home = () => {
                                 {(!loading && isAuthenticated) ? (<Link to='/novopost' className="btn">Criar Post</Link>) : <span></span>}
                             </div>
                         </div>
-                        {(!loading_posts) ? (<Fragment><div style={rowHandler(posts.length)} className="posts-grid">
+                        {(!loading_posts && !loading_tags && posts) ? (<Fragment><div style={rowHandler(posts.length)} className="posts-grid">
                                 {posts.slice(0, 9).map((post, idx) => { return(
-                                    <div onClick={() => onClick(idx)} className="post" key={idx}>
+                                    <div onClick={() => onClickPost(idx)} className="post" key={idx}>
                                         <Link to={`/post/${post._id}`}><img src={post.img} alt="" /></Link>
                                         <Link to={`/post/${post._id}`}><p>{post.title}</p></Link>
                                         <Link to={`/post/${post._id}`}><span>{formatDate(post.date)}</span></Link>
@@ -88,15 +98,9 @@ const Home = () => {
                             <h2>Tags</h2>
                         </div>
                         <div className="home-sidebar-contents">
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hakumei to Mikochi</p> <span>2</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hayate no Gotoku</p> <span>23</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hi no Tori</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Kaiji</p> <span>7</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Lupin III Part II</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Magical Nyan Nyan Taruto</p> <span>9</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Mahoujin Guru Guru</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Shoujo Cosette</p> <span>21</span></div>
-                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Tamayura</p> <span>2</span></div>
+                            {(!loading_posts && !loading_tags && tags) ? (<Fragment>{tags.map((tag, idx) => {
+                                return <div key={idx + "c"} className="home-sidebar-item"><Link  onClick={() => onClickTag(idx)} to={`/tag/${tag._id}`}><i className="fas fa-angle-right"></i> {tag.name}</Link> <span>{tag.posts.length}</span></div>
+                            })}</Fragment>) : <span></span>}
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useContext, useEffect} from 'react';
+import React, {Fragment, useState, useContext, useEffect, useRef} from 'react';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PostContext from '../../context/post/postContext';
@@ -12,7 +12,7 @@ const NovoPost = () => {
     const postContext = useContext(PostContext);
     const authContext = useContext(AuthContext);
 
-    const {postPost, error} = postContext;
+    const {postPost, error, loading, resetError} = postContext;
     const {loadAdmin, admin} = authContext;
 
     useEffect(() => {
@@ -20,14 +20,21 @@ const NovoPost = () => {
         // eslint-disable-next-line
     }, []);
 
+    let submitted = useRef(false);
+
+
     useEffect(()=> {
         if (error) {
-            console.error(error);
             errorMsgRef.current.classList.add("float-in");
+            resetError();
+            submitted.current = false;
+        } else if (!loading && submitted.current) {
+            submitted.current = false;
+            successMsgRef.current.classList.add("float-in");
             postFormRef.current.reset();
         };
         // eslint-disable-next-line
-    }, [error]);
+    }, [error, loading, submitted.current]);
 
     const [post, setPost] = useState({
         title: '',
@@ -49,8 +56,7 @@ const NovoPost = () => {
             tags,
             author: admin.username
         });
-        successMsgRef.current.classList.add("float-in");
-        postFormRef.current.reset();
+        submitted.current = true;
     };
 
     const removeErrorMsg = () => errorMsgRef.current.classList.remove('float-in');
@@ -60,7 +66,7 @@ const NovoPost = () => {
     return(
         <Fragment>
             <div ref={successMsgRef} className="msg success-msg"><h5>Post realizado com sucesso.</h5><span><i onClick={removeSuccessMsg} className="fas fa-times"></i></span></div>
-            <div ref={errorMsgRef} className="msg error-msg"><h5>{error}</h5><span><i onClick={removeErrorMsg} className="fas fa-times"></i></span></div>
+            <div ref={errorMsgRef} className="msg error-msg"><h5>Post inválido.</h5><span><i onClick={removeErrorMsg} className="fas fa-times"></i></span></div>
             <Navbar />
             <section id="novo-post">
                 <div className="form-card">

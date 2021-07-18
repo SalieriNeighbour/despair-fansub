@@ -10,7 +10,8 @@ import {
     POST_EDITED,
     POST_EDIT_FAIL,
     POST_DELETED,
-    POST_DELETE_FAIL
+    POST_DELETE_FAIL,
+    RESET_ERROR
 } from '../types';
 
 const postReducer = (state, action) => {
@@ -48,6 +49,11 @@ const postReducer = (state, action) => {
             return {
                 ...state,
                 loading: true
+            }
+        case RESET_ERROR:
+            return {
+                ...state,
+                error: null
             }
         case POST_LOAD_FAIL:
         case POST_FAIL:

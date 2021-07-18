@@ -14,7 +14,8 @@ import {
     POST_EDITED,
     POST_EDIT_FAIL,
     POST_DELETED,
-    POST_DELETE_FAIL
+    POST_DELETE_FAIL,
+    RESET_ERROR
 } from '../types';
 
 const PostState = props => {
@@ -62,7 +63,7 @@ const PostState = props => {
             dispatch({type: POST_SUCCESSFUL, payload: res.data});
         } catch (err) {
             console.error(err);
-            dispatch({type: POST_FAIL, payload: err.data});
+            dispatch({type: POST_FAIL, payload: err.response.data});
         }
     };
 
@@ -79,7 +80,7 @@ const PostState = props => {
             dispatch({type: POST_EDITED, payload: res.data});
         } catch (err) {
             console.error(err);
-            dispatch({type: POST_EDIT_FAIL, payload: err.data});
+            dispatch({type: POST_EDIT_FAIL, payload: err.response.data});
         }
     }
 
@@ -98,6 +99,8 @@ const PostState = props => {
 
     const setLoading = async () => dispatch({type: SET_LOADING, payload: null});
 
+    const resetError = async () => dispatch({type: RESET_ERROR, payload: null});
+
     return (
         <PostContext.Provider 
         value={{
@@ -109,6 +112,7 @@ const PostState = props => {
             loadPost,
             postPost,
             setLoading,
+            resetError,
             preSetPostInfo,
             editPost,
             deletePost
