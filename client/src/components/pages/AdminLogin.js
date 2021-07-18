@@ -5,6 +5,7 @@ import AuthContext from '../../context/auth/authContext';
 
 const AdminLogin = props => {
     const errorMsgRef = React.createRef();
+    const loginFormRef = React.createRef();
 
     const authContext = useContext(AuthContext);
 
@@ -23,6 +24,7 @@ const AdminLogin = props => {
         if (error) {
             console.error(error);
             errorMsgRef.current.classList.add("float-in");
+            loginFormRef.current.reset();
         };
         // eslint-disable-next-line
     }, [isAuthenticated, error]);
@@ -48,14 +50,14 @@ const AdminLogin = props => {
 
     return(
         <Fragment>
-            <div ref={errorMsgRef} className="error-msg"><h5>{error}</h5><span><i onClick={removeMsg} className="fas fa-times"></i></span></div>
+            <div ref={errorMsgRef} className="msg error-msg"><h5>{error}</h5><span><i onClick={removeMsg} className="fas fa-times"></i></span></div>
             <Navbar />
             <section id="admin-login">
                 <div className="form-card">
                     <h3>Admin Login</h3>
-                    <form onSubmit={onSubmit} autoComplete="off" className="login-form">
+                    <form ref={loginFormRef} onSubmit={onSubmit} autoComplete="off" className="login-form">
                         <input onChange={onChange} name="username" type="text" placeholder="Usuário" className="form-input" required />
-                        <input onChange={onChange} name="password" type="passsword" placeholder="Senha" className="form-input" required />
+                        <input onChange={onChange} name="password" type="password" placeholder="Senha" className="form-input" required />
                         <input className="btn" type="submit" value="Login" />
                     </form>
                 </div>

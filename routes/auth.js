@@ -41,6 +41,7 @@ router.post('/', async(req, res) => {
         return res.status(400).send("Dados inválidos.");
     }
 
+
     try {
         let admin = await Admin.findOne({ username });
 

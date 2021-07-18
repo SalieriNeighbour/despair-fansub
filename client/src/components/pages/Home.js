@@ -3,17 +3,55 @@ import {Link} from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import AuthContext from '../../context/auth/authContext';
+import PostContext from '../../context/post/postContext';
+
+import Spinner from '../img/spinner.gif';
+
 
 const Home = () => {
     const authContext = useContext(AuthContext);
+    const postContext = useContext(PostContext);
 
     const {loadAdmin, loading, isAuthenticated} = authContext;
+    const {posts, loading: loading_posts, loadPosts, preSetPostInfo} = postContext;
 
     useEffect(() =>{
         loadAdmin();
-        
         // eslint-disable-next-line
-    }, []);
+    }, [posts]);
+
+    useEffect(() => {
+        loadPosts()
+        // eslint-disable-next-line
+    }, [])
+
+    const formatDate = date => {
+        date = new Date(date);
+        const months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        let dt = date.getDate();
+
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        
+        return (dt + ' ' + months[month] + ' ' + year)
+    }
+
+    const rowHandler = posts_length => {
+        let style = {};
+        if (posts_length > 6) {
+            style = {gridTemplateRows: '1fr 1fr 1fr'}
+        } else if (posts_length > 3 ) {
+            style = {gridTemplateRows: '1fr 1fr'}
+        } else {
+            style = {gridTemplateRows: '1fr'}
+        }
+        return style;
+    };
+
+    const onClick = idx => preSetPostInfo(posts[idx])
 
     return(
         <Fragment>
@@ -27,68 +65,38 @@ const Home = () => {
                                 {(!loading && isAuthenticated) ? (<Link to='/novopost' className="btn">Criar Post</Link>) : <span></span>}
                             </div>
                         </div>
-                        <div className="posts-grid">
-                            <div className="post">
-                                <Link><img src="https://i.imgur.com/SJ1xHba.jpeg" alt="" /></Link>
-                                <Link><p>Magical Nyan Nyan Taruto - 09</p></Link>
-                                <Link><span>16 jul 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790522727202837/KitsuneFansubber_Hakumei_to_Mikochi_-_02_720pHDTV.mkv_snapshot_21.34.367.png" alt="" /></Link>
-                                <Link><p>Hakumei to Mikochi - 02</p></Link>
-                                <Link><span>13 jul 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790528574062592/FUCKILL_Lupin_III_Part_II_-_001_720p.mkv_snapshot_04.51_2021.02.04_14.08.12.jpg" alt="" /></Link>
-                                <Link><p>Lupin III Part II - 01</p></Link>
-                                <Link><span>11 jul 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790545762582588/AnimesPLUS_Les_Miserables_Shoujo_Cosette_21_HDTV720p33F26BEC.mkv_snapshot_05.03.836.png" alt="" /></Link>
-                                <Link><p>Shoujo Cosette - 21</p></Link>
-                                <Link><span>06 jul 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790555183120444/npz_Hi_no_Tori_01_US_BD_1080p_42850851.mkv_snapshot_12.32.576.png" alt="" /></Link>
-                                <Link><p>Hi no Tori - 01</p></Link>
-                                <Link><span>01 jul 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790558433706004/AnimeNSK_Hayate_no_Gotoku_-_23_Blu-Ray_1920x1080_HEVC_10Bit_395409DC.mkv_snapshot_14.54_2021.04.27_2.png" alt="" /></Link>
-                                <Link><p>Hayate no Gotoku - 23</p></Link>
-                                <Link><span>29 jun 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790541077938216/Moozzi2_Tamayura_More_Aggressive_-_02_BD_1920x1080_x.264_2Audio.mkv_snapshot_15.15_2021.04.21_00.34..png" alt="" /></Link>
-                                <Link><p>Tamayura - 02</p></Link>
-                                <Link><span>26 jun 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://cdn.discordapp.com/attachments/813986653709926432/865790559170592768/DBGyakkyou_Burai_Kaiji_Ultimate_Survivor_-_07_10bit_BD1080p_x265.mkv_snapshot_03.36_2021.05.22_15.36.png" alt="" /></Link>
-                                <Link><p>Kaiji - 07</p></Link>
-                                <Link><span>24 jun 2021</span></Link>
-                            </div>
-                            <div className="post">
-                                <Link><img src="https://media.discordapp.net/attachments/813986653709926432/865790560539508747/AI-Raws_HD_01__H264_10bit_1584x1080_AACA25ED7B1.mkv_snapshot_16.45.699.png" alt="" /></Link>
-                                <Link><p>Mahoujin Guru Guru - 01</p></Link>
-                                <Link><span>20 jun 2021</span></Link>
-                            </div>
-                        </div>
+                        {(!loading_posts) ? (<Fragment><div style={rowHandler(posts.length)} className="posts-grid">
+                                {posts.slice(0, 9).map((post, idx) => { return(
+                                    <div onClick={() => onClick(idx)} className="post" key={idx}>
+                                        <Link to={`/post/${post._id}`}><img src={post.img} alt="" /></Link>
+                                        <Link to={`/post/${post._id}`}><p>{post.title}</p></Link>
+                                        <Link to={`/post/${post._id}`}><span>{formatDate(post.date)}</span></Link>
+                                    </div>
+                                )})}
+                                </div>
+                                <div className="posts-page-browser">
+                                    <span><Link to="/">1</Link></span>
+                                    {Array.from({length:Math.ceil(posts.length/9)-1 < 0 ? 0 : Math.ceil(posts.length/9)-1},(v,k)=>k+1).map(idx => {
+                                        return <span key={(idx+1) + "b"}><Link to={`/page/${idx+1}`}>{idx+1}</Link></span>
+                                    })}
+                                </div>
+                            </Fragment>) : (<div className="spinner-div"><img src={Spinner} alt="" /></div>)}
+                        
                     </div>
                     <div className="home-sidebar">
                         <div className="sidebar-header">
                             <h2>Tags</h2>
                         </div>
                         <div className="home-sidebar-contents">
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Hakumei to Mikochi</p> <span>2</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Hayate no Gotoku</p> <span>23</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Hi no Tori</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Kaiji</p> <span>7</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Lupin III Part II</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Magical Nyan Nyan Taruto</p> <span>9</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Mahoujin Guru Guru</p> <span>1</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Shoujo Cosette</p> <span>21</span></div>
-                            <div className="home-sidebar-item"><p><i class="fas fa-angle-right"></i> Tamayura</p> <span>2</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hakumei to Mikochi</p> <span>2</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hayate no Gotoku</p> <span>23</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Hi no Tori</p> <span>1</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Kaiji</p> <span>7</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Lupin III Part II</p> <span>1</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Magical Nyan Nyan Taruto</p> <span>9</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Mahoujin Guru Guru</p> <span>1</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Shoujo Cosette</p> <span>21</span></div>
+                            <div className="home-sidebar-item"><p><i className="fas fa-angle-right"></i> Tamayura</p> <span>2</span></div>
                         </div>
                     </div>
                 </div>

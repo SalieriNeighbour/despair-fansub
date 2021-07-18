@@ -1,18 +1,21 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../img/logo.png'
+import PostContext from '../../context/post/postContext';
 
-class NavbarHome extends React.Component {
-    render () {
+const NavbarHome = () => {
+        const postContext = useContext(PostContext);
+        const {setLoading} = postContext;
+
         return (
             <Fragment>
                 <div className="navbar">
                     <div className="navbar-contents">
                         <div className="navbar-logo">
-                            <Link to="/"><img src={Logo} alt="Logo" className="logo" /></Link>
+                            <Link to="/" onClick={setLoading}><img src={Logo} alt="Logo" className="logo" /></Link>
                         </div>
                         <div className="nav-link">
-                            <Link to="/">Home</Link>
+                            <Link to="/" onClick={setLoading}>Home</Link>
                         </div>
                         <div className="dropdown">
                             <div className="nav-link">
@@ -35,6 +38,6 @@ class NavbarHome extends React.Component {
             </Fragment>
         )
     }
-}
+
 
 export default NavbarHome;

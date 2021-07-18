@@ -2,10 +2,13 @@
 
 :root {
   --palette-red1: rgb(212, 21, 53);
+  --palette-red2: rgb(255, 0, 0);
   --palete-green1: rgb(0, 128, 0);
+  --palete-yellow1: rgb(200, 200, 0);
   --palette-black1: #000;
   --palette-black2: rgb(68, 68, 68);
   --palette-black3: rgb(32, 32, 32);
+  --palette-black4: rgb(128, 128, 128);
   --palette-white1: #fff;
   --palette-white2: rgb(216, 206, 206);
   --invisible: rgba(0, 0, 0, 0);
@@ -254,7 +257,7 @@ a {
 .posts-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr; */
   column-gap: 15px;
   row-gap: 15px;
   text-align: center;
@@ -281,6 +284,34 @@ a {
 .post img {
   width: 250px;
   height: 170px;
+}
+
+.posts-page-browser {
+  margin-top: 2rem;
+}
+
+.posts-page-browser span {
+  font-size: 1.5rem;
+  margin-right: 5px;
+  padding: 3px 10px;
+  cursor: pointer;
+  background-color: var(--palette-black3);
+}
+
+.posts-page-browser span:hover {
+  background-color: var(--palette-red1);
+}
+
+.posts-page-browser .active {
+  background-color: var(--palette-red1);
+}
+
+.home-main .posts-page-browser span:first-child {
+  background-color: var(--palette-red1);
+}
+
+.posts-page-browser a {
+  color: var(--palette-white1);
 }
 
 .home-sidebar {
@@ -339,7 +370,7 @@ a {
 
 .newpost-form .form-item {
   width: 95%;
-  margin: 1rem auto;
+  margin: 0.5rem auto;
 }
 
 .newpost-form .form-item .form-input {
@@ -349,6 +380,28 @@ a {
 
 .newpost-form .form-item textarea {
   min-height: 30vh;
+  white-space: pre-wrap;
+}
+
+.form-middle {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.newpost-form .form-middle .form-item {
+  text-align: left;
+  margin-left: 1rem;
+  margin-bottom: 0;
+  width: 45%;
+}
+
+.newpost-form .form-middle .form-input {
+  left: 0;
+}
+
+.newpost-form .form-file-item {
+  padding-top: 1.5rem;
 }
 
 .newpost-form .form-submit {
@@ -360,6 +413,128 @@ a {
 .newpost-form .form-submit .btn {
   padding: 6px 0;
   width: 25%;
+}
+
+/* Post Page */
+
+.post-card {
+  width: 60%;
+  margin: 3rem auto;
+}
+
+.post-card-header {
+  padding-bottom: 5px;
+  border-bottom: 4px solid var(--palette-red1);
+}
+
+.post-card h2 {
+  margin-bottom: 5px;
+}
+
+.post-author {
+  color: var(--palette-red1);
+}
+
+.post-date {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--palette-black4);
+}
+
+.post-body-img {
+  width: 100%;
+  text-align: center;
+}
+
+.post-card-body img {
+  width: 450px;
+  height: auto;
+  margin-top: 2rem;
+}
+
+.post-body-text {
+  width: 100%;
+  margin: 3rem 0;
+}
+
+.post-body-text p {
+  white-space: pre-wrap;
+}
+
+.post-body-text a {
+  color: var(--palette-red1);
+  text-decoration: underline;
+}
+
+.post-buttons {
+  float: right;
+}
+
+.post-buttons i {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+.post-buttons .fa-pencil-alt {
+  color: var(--palete-yellow1);
+}
+
+.post-buttons .delete-form {
+  display: inline-block;
+}
+
+.post-buttons button {
+  border: none;
+  background: none;
+}
+
+.post-buttons .fa-trash-alt {
+  color: var(--palette-red2);
+  cursor: pointer;
+}
+
+/* Not Found */
+
+.not-found-header {
+  width: 100%;
+  text-align: center;
+  margin-top: 10rem;
+  min-height: 10vh;
+}
+
+.not-found-header h1 {
+  margin-bottom: 4rem;
+  font-size: 3rem;
+}
+
+.not-found-header a {
+  color: var(--palette-red1);
+  font-size: 2rem;
+  text-decoration: underline;
+}
+
+/* Post Browsing */
+
+.browsing-space {
+  width: 60%;
+  margin: 2rem auto;
+}
+
+.browsing-header h1 {
+  font-size: 2rem;
+}
+
+.browsing-posts {
+  margin-top: 2rem;
+}
+
+.browsing-posts .posts-page-browser {
+  width: 100%;
+  text-align: center;
+}
+
+.browsing-posts .posts-page-browser span {
+  font-size: 2rem;
 }
 
 /* Helpers */
@@ -418,10 +593,9 @@ a {
   display: none;
 }
 
-.error-msg {
+.msg {
   display: flex;
   position: absolute;
-  background-color: rgb(219, 58, 58);
   padding: 1rem;
   width: 20%;
   left: 0;
@@ -435,16 +609,29 @@ a {
   z-index: 2;
 }
 
+.error-msg {
+  background-color: var(--palette-red1);
+}
+
+.success-msg {
+  background-color: var(--palete-green1);
+}
+
 .float-in {
   top: 12%;
 }
 
-.error-msg .fa-times {
+.msg .fa-times {
   position: absolute;
   right: 5%;
   top: 40%;
 }
 
-.error-msg .fa-times:hover {
+.msg .fa-times:hover {
   cursor: pointer;
+}
+
+.spinner-div {
+  width: 100%;
+  text-align: center;
 }
