@@ -78,7 +78,7 @@ const Post = props => {
 
     const disqusShortname = 'despairfansub';
     const disqusConfig = {
-        url: `despair-fansub.herokuapp.com/post/${params.post_id}`,
+        url: `https://despair-fansub.herokuapp.com/post/${params.post_id}`,
         identifier: params.post_id,
         title: ''
     }
