@@ -52,7 +52,7 @@ const BrowsingProjects = props => {
                         {(!loading && projects) ? (
                             <Fragment>{projects.map((project, idx) => {
                                 return (
-                                    <div key={idx}>{params.project_status === project.status ? (
+                                    <Fragment key={idx}>{params.project_status === project.status ? (
                                         <div className="browsing-projects-item">
                                             <div onClick={() => onClickProject(idx)} className="project-cover">
                                                 <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}><img src={project.cover} alt="" /> <span>{project.qualidade.split("x")[1] + "p"}</span></Link>
@@ -62,7 +62,7 @@ const BrowsingProjects = props => {
                                                 <p>{project.year}</p>
                                             </div>
                                         </div>
-                                    ) : (<Fragment></Fragment>)}</div>
+                                    ) : (<Fragment></Fragment>)}</Fragment>
                                 )
                             })}</Fragment>
                         ) : (<div className="spinner-div"><img src={Spinner} alt="" /></div>)}

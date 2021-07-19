@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css'
-// import PrivateRoute from './components/routing/PrivateRoute';
+import PrivateRoute from './components/routing/PrivateRoute';
 
 // Pages
 import AdminLogin from './components/pages/AdminLogin';
@@ -24,6 +24,7 @@ import AuthState from './context/auth/authState';
 import ProjectState from './context/project/projectState';
 import PostState from './context/post/postState';
 import TagsState from './context/tags/tagsState';
+import ContactState from './context/contact/contactState';
 
 function App() {
   return (
@@ -31,27 +32,25 @@ function App() {
       <ProjectState>
         <PostState>
           <TagsState>
-            <Router>
-              <Switch>
-                <Route component={Contato} exact path="/contato" />
-                <Route component={NovoPost} exact path="/novopost" />
-                {/* TODO: Make Private ^^ */}
-                <Route component={EditPost} path="/post/edit/:post_id" />
-                {/* TODO: Make Private ^^ */}
-                <Route component={NovoProjeto} exact path="/novoprojeto" />
-                {/* TODO: Make Private ^^ */}
-                <Route component={EditProject} path="/project/edit/:project_id" />
-                {/* TODO: Make Private ^^ */}
-                <Route component={AdminLogin} exact path="/adminlogin" />
-                <Route component={BrowsingProjects} exact path="/browsingprojects/:project_status" />
-                <Route component={Home} exact path="/" />
-                <Route component={Post} path="/post/:post_id" />
-                <Route component={BrowsingPage} path="/page/:page_id" />
-                <Route component={ProjectPage} path="/project/:project_id/:project_title" />
-                <Route component={TagPage} path="/tag/:tag_id" />
-                <Route component={NotFound} />
-              </Switch>
-            </Router>
+            <ContactState>
+              <Router>
+                <Switch>
+                  <PrivateRoute component={NovoPost} exact path="/novopost" />
+                  <PrivateRoute component={EditPost} path="/post/edit/:post_id" />
+                  <PrivateRoute component={NovoProjeto} exact path="/novoprojeto" />
+                  <PrivateRoute component={EditProject} path="/project/edit/:project_id" />
+                  <Route component={AdminLogin} exact path="/adminlogin" />
+                  <Route component={BrowsingProjects} exact path="/browsingprojects/:project_status" />
+                  <Route component={Home} exact path="/" />
+                  <Route component={Contato} exact path="/contato" />
+                  <Route component={Post} path="/post/:post_id" />
+                  <Route component={BrowsingPage} path="/page/:page_id" />
+                  <Route component={ProjectPage} path="/project/:project_id/:project_title" />
+                  <Route component={TagPage} path="/tag/:tag_id" />
+                  <Route component={NotFound} />
+                </Switch>
+              </Router>
+            </ContactState>
           </TagsState>
         </PostState>
       </ProjectState>

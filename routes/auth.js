@@ -74,7 +74,7 @@ router.post('/', async(req, res) => {
 
  // Register an admin
  // Out of reach
- router.post('/register', async(req, res) => {
+ router.post('/register', auth, async(req, res) => {
      const {username, password} = req.body;
 
      try {

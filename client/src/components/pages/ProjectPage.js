@@ -75,9 +75,22 @@ const ProjectPage = props => {
                                         <span>{project_info.karaoke}</span>
                                     </div>
                                 ) : (<Fragment></Fragment>)}
+                                {project_info.timer ? (
+                                    <div className="info-item">
+                                        <p>Timer</p>
+                                        <span>{project_info.timer}</span>
+                                    </div>
+                                ) : (<Fragment></Fragment>)}
+                                {project_info.logo_creator ? (
+                                    <div className="info-item">
+                                        <p>Logo Creator</p>
+                                        <span>{project_info.logo_creator}</span>
+                                    </div>
+                                ) : (<Fragment></Fragment>)}
                             </div>
                             <div className="main-section">
                                 <div className="top-section">
+                                    <img src={project_info.cover} alt="" />
                                     <h1>{project_info.title} <span>{project_info.year}</span></h1>
                                     <p>{"Sinopse: " + project_info.synopsis}</p>
                                     <p>Total de episódios: {Object.keys(project_info.eps).length + "/" + project_info.num_eps}</p>
