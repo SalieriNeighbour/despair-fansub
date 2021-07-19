@@ -1,12 +1,14 @@
 import React, {Fragment, useContext, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import DOMPurify from 'dompurify';
+import Disqus from 'disqus-react';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 import PostContext from '../../context/post/postContext';
 import AuthContext from '../../context/auth/authContext';
 
 import Spinner from '../img/spinner.gif';
+
 
 const Post = props => {
     const { match: {params} } = props;
@@ -74,6 +76,21 @@ const Post = props => {
         return DOMPurify.sanitize(text, {ALLOWED_TAGS: ['span', 'a', 'br'], ALLOWED_ATTR: ['style', 'href']});
     }
 
+    const disqusShortname = 'despairfansub';
+    const disqusConfig = {
+        url: `despair-fansub.herokuapp.com/post/${params.post_id}`,
+        identifier: params.post_id,
+        title: ''
+    }
+
+    useEffect(() => {
+        if (post_info) {
+            disqusConfig.title = post_info.title;
+        }
+
+        // eslint-disable-next-line
+    }, [post_info]);
+
     const onSubmit = e => {
         e.preventDefault();
         deletePost(params.post_id);
@@ -106,6 +123,10 @@ const Post = props => {
                             <div className="post-body-text">
                                 <p dangerouslySetInnerHTML={{__html: formatText(post_info.content)}}></p>
                             </div>
+                            <Disqus.DiscussionEmbed 
+                            shortname={disqusShortname}
+                            config={disqusConfig}
+                            />
                         </div>
                     </div>
                 ) : (<div className="spinner-div"><img src={Spinner} alt="" /></div>)}
