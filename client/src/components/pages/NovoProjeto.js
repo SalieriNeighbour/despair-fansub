@@ -62,7 +62,6 @@ const NovoProjeto = () => {
 
     const onChange = e => {
         setProject({...project, [e.target.name]: e.target.value});
-        console.log(status);
     }
 
     const onChangeEp = e => {

@@ -39,7 +39,6 @@ router.post('/', auth, async (req, res) => {
         const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
         if (title === '' || synopsis === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
-            console.log(title + ';' + synopsis + ';' + tradutor + ';' + typesetter + ';' + encoder + ';' + year + ';' + cover + ';' + qualidade + ';' + video + ';' + audio + ';' + status + ';' + cover)
             return res.status(400).send("Post inválido.");
         }
         
@@ -81,9 +80,6 @@ router.put('/:project_id', auth, async (req, res) => {
         const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
         if (title === '' || synopsis === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
-            console.log(title+';'+synopsis+';'+tradutor+';'+typesetter+';'+eps+';'+encoder+';'+year+';'+title+';'+cover+';'+qualidade+';'+video+';'+audio+';'+cover+';'+status+';');
-            console.log(cover.match(/\.(jpeg|jpg|png)$/) !== null);
-            console.log(status === 'em-andamento' || status === 'concluidos')
             return res.status(400).send("Post inválido.");
         }
 
