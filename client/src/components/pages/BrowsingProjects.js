@@ -1,18 +1,43 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
 import Navbar from '../layout/Navbar';
 import Footer from '../layout/Footer';
 
+import ProjectContext from '../../context/project/projectContext';
+import AuthContext from '../../context/auth/authContext';
+
+import Spinner from '../img/spinner.gif';
+
 const BrowsingProjects = props => {
     const { match: {params} } = props;
 
+    const projectContext = useContext(ProjectContext);
+    const authContext = useContext(AuthContext);
+
+    const {projects, loading, loadProjects, preSetProjectInfo} = projectContext;
+    const {loadAdmin, loading: loading_admin, isAuthenticated} = authContext;
+
+    useEffect(() => {
+        loadProjects();
+        loadAdmin();
+
+        // eslint-disable-next-line
+    }, [])
 
     useEffect(() => {
         if (params.project_status !== 'em-andamento' && params.project_status !== 'concluidos') {
             props.history.push('/404')
         }
+
         // eslint-disable-next-line
     }, [params.project_status]);
+
+    const linkTextHandler = title => {
+        title = title.replace(/[^a-z0-9\s-]/ig,'').trim().replace(/\s+/g, '-').toLowerCase();
+        return title;
+    }
+
+    const onClickProject = idx => preSetProjectInfo(projects[idx]);
 
     return (
         <Fragment>
@@ -21,80 +46,26 @@ const BrowsingProjects = props => {
                 <div className="browsing-projects">
                     <div className="browsing-projects-header">
                         <h1>Projetos {params.project_status === "em-andamento" ? "em andamento" : "concluídos"}</h1>
+                        {(!loading_admin && !loading && isAuthenticated) ? (<Link to='/novoprojeto' className="btn">Criar Projeto</Link>) : <Fragment></Fragment>}
                     </div>
                     <div className="browsing-projects-content">
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/project/(project-title)'><img src="https://cdn.myanimelist.net/images/anime/5/64671.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/project/(project-title)'>Ashita no Joe</Link>
-                                <p>1970</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/7/56643.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Chuunibyou Demo Koi ga Shitai! Ren</Link>
-                                <p>2014</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/1365/106794.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Asatir: Mirai no Mukashi Banashi</Link>
-                                <p>2020</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/8/60781.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Cardcaptor Sakura</Link>
-                                <p>1998</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/1/1852.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Hidamari Sketch</Link>
-                                <p>2007</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/1139/105873.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Kitsutsuki Tanteidokoro</Link>
-                                <p>2020</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/10/18793.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Monster</Link>
-                                <p>2020</p>
-                            </div>
-                        </div>
-                        <div className="browsing-projects-item">
-                            <div className="project-cover">
-                                <Link to='/'><img src="https://cdn.myanimelist.net/images/anime/12/18520.jpg" alt="" /></Link>
-                            </div>
-                            <div className="project-info">
-                                <Link to='/'>Monster</Link>
-                                <p>2020</p>
-                            </div>
-                        </div>
+                        {(!loading && projects) ? (
+                            <Fragment>{projects.map((project, idx) => {
+                                return (
+                                    <div key={idx}>{params.project_status === project.status ? (
+                                        <div className="browsing-projects-item">
+                                            <div onClick={() => onClickProject(idx)} className="project-cover">
+                                                <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}><img src={project.cover} alt="" /> <span>{project.qualidade.split("x")[1] + "p"}</span></Link>
+                                            </div>
+                                            <div onClick={() => onClickProject(idx)} className="project-info">
+                                                <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}>{project.title}</Link>
+                                                <p>{project.year}</p>
+                                            </div>
+                                        </div>
+                                    ) : (<Fragment></Fragment>)}</div>
+                                )
+                            })}</Fragment>
+                        ) : (<div className="spinner-div"><img src={Spinner} alt="" /></div>)}
                     </div>
                 </div>
             </section>

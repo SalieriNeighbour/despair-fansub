@@ -57,6 +57,7 @@ const NovoPost = () => {
             author: admin.username
         });
         submitted.current = true;
+        window.scrollTo(0, 0);
     };
 
     const removeErrorMsg = () => errorMsgRef.current.classList.remove('float-in');

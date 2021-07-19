@@ -76,6 +76,7 @@ const NovoPost = props => {
             author: admin.username
         }, params.post_id);
         submitted.current = true;
+        window.scrollTo(0, 0);
     };
 
     const removeErrorMsg = () => errorMsgRef.current.classList.remove('float-in');

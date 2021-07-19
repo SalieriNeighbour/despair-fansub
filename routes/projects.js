@@ -36,9 +36,10 @@ router.get('/:project_id', async (req, res) => {
 // Private
 router.post('/', auth, async (req, res) => {
     try {
-        const {title, synopsis, num_eps, year, cover, qualidade, video, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps} = req.body;
+        const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
-        if (title === '' || synopsis === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null){
+        if (title === '' || synopsis === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
+            console.log(title + ';' + synopsis + ';' + tradutor + ';' + typesetter + ';' + encoder + ';' + year + ';' + cover + ';' + qualidade + ';' + video + ';' + audio + ';' + status + ';' + cover)
             return res.status(400).send("Post inválido.");
         }
         
@@ -50,6 +51,7 @@ router.post('/', auth, async (req, res) => {
             cover,
             qualidade,
             video,
+            source,
             audio,
             tradutor,
             typesetter,
@@ -59,7 +61,8 @@ router.post('/', auth, async (req, res) => {
             revisor,
             timer,
             logo_creator,
-            eps
+            eps,
+            status
         });
 
         await project.save();
@@ -75,13 +78,16 @@ router.post('/', auth, async (req, res) => {
 // Private
 router.put('/:project_id', auth, async (req, res) => {
     try {
-        const {title, synopsis, num_eps, year, cover, qualidade, video, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps} = req.body;
+        const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
-        if (title === '' || synopsis === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null){
+        if (title === '' || synopsis === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
+            console.log(title+';'+synopsis+';'+tradutor+';'+typesetter+';'+eps+';'+encoder+';'+year+';'+title+';'+cover+';'+qualidade+';'+video+';'+audio+';'+cover+';'+status+';');
+            console.log(cover.match(/\.(jpeg|jpg|png)$/) !== null);
+            console.log(status === 'em-andamento' || status === 'concluidos')
             return res.status(400).send("Post inválido.");
         }
 
-        let project = await Project.findById(req.params.post_id);
+        let project = await Project.findById(req.params.project_id);
         
         project.title = title;
         project.synopsis = synopsis;
@@ -90,6 +96,7 @@ router.put('/:project_id', auth, async (req, res) => {
         project.cover = cover;
         project.qualidade = qualidade;
         project.video = video;
+        project.source = source;
         project.audio = audio;
         project.tradutor = tradutor;
         project.typesetter = typesetter;
@@ -100,6 +107,7 @@ router.put('/:project_id', auth, async (req, res) => {
         project.timer = timer;
         project.logo_creator = logo_creator;
         project.eps = eps;
+        project.status = status;
 
 
         await project.save();
@@ -115,7 +123,7 @@ router.put('/:project_id', auth, async (req, res) => {
 // Private
 router.delete('/:project_id', auth, async (req, res) => {
     try {
-        await Post.findOneAndDelete({_id: req.params.post_id});
+        await Project.findOneAndDelete({_id: req.params.project_id});
 
         res.json("Post deletado com sucesso.");
     } catch (err) {

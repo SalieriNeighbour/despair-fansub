@@ -29,6 +29,10 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    source: {
+        type: String,
+        default: ''
+    },
     audio: {
         type: String,
         required: true
@@ -66,8 +70,12 @@ const ProjectSchema = mongoose.Schema({
         default: ''
     },
     eps: {
-        type: Array,
-        default: []
+        type: Object,
+        default: {}
+    },
+    status: {
+        type: String,
+        required: true
     },
     date: {
         type: Date,
