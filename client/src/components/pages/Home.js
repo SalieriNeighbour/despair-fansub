@@ -8,7 +8,6 @@ import TagsContext from '../../context/tags/tagsContext';
 
 import Spinner from '../img/spinner.gif';
 
-
 const Home = () => {
     const authContext = useContext(AuthContext);
     const postContext = useContext(PostContext);

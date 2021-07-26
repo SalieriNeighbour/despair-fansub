@@ -196,10 +196,16 @@ a {
   width: 100%;
   height: 100px;
   display: flex;
+  flex-direction: column;
   background-color: var(--palette-black1);
   color: var(--palette-white1);
   align-items: center;
   justify-content: center;
+  text-align: center;
+}
+
+.footer p:first-child {
+  margin-bottom: 5px;
 }
 
 /* Login */

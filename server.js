@@ -1,4 +1,5 @@
 const express = require('express');
+const secure = require('ssl-express-www');
 const path = require('path');
 const connectDB = require('./config/db');
 
@@ -9,6 +10,7 @@ connectDB();
 
 // Middleware
 app.use(express.json({extended: false}));
+app.use(secure);
 
 // Defining routes
 app.use('/api/auth', require('./routes/auth'));

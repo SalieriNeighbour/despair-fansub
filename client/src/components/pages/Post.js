@@ -9,7 +9,6 @@ import AuthContext from '../../context/auth/authContext';
 
 import Spinner from '../img/spinner.gif';
 
-
 const Post = props => {
     const { match: {params} } = props;
 
@@ -78,7 +77,7 @@ const Post = props => {
 
     const disqusShortname = 'despairfansub';
     const disqusConfig = {
-        url: `https://despair-fansub.herokuapp.com/post/${params.post_id}`,
+        url: `https://despairfansub.com/post/${params.post_id}`,
         identifier: params.post_id,
         title: ''
     }
