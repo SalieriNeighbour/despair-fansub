@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: 
+Sitemap: https://despairfansub.com/sitemap.xml
