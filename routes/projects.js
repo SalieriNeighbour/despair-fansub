@@ -9,7 +9,7 @@ const auth = require('../middleware/auth');
 // Public
 router.get('/', async (req, res) => {
     try {
-        const projects = await Project.find().sort({date: -1});
+        const projects = await Project.find().collation({locale: 'en', strength: 1}).sort({title: 1});
         res.send(projects);
     } catch (err) {
         console.error(err.message);

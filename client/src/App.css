@@ -959,10 +959,6 @@ a {
   padding-top: 8px;
 }
 
-.project-page-contents .side-bar .info-item:last-child {
-  border: none;
-}
-
 .project-page-contents .side-bar .info-item p {
   color: var(--palette-white1);
   font-weight: 300;
