@@ -126,18 +126,6 @@ const Post = props => {
                             shortname={disqusShortname}
                             config={disqusConfig}
                             />
-                            <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-                            <script dangerouslySetInnerHTML={{__html: `const disqus = jQuery('#disqus_thread');
-
-                                disqus.ready(function() {
-                                setTimeout(function() {
-                                    if (disqus.children().length >= 3) {
-                                    const comments = disqus.find('iframe:nth-child(2)').detach();
-                                    disqus.empty().append(comments);
-                                    }
-                                }, 2000);
-                                });
-                                `}}></script>
                         </div>
                     </div>
                 ) : (<div className="spinner-div"><img src={Spinner} alt="" /></div>)}
