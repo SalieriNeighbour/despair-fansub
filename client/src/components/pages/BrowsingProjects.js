@@ -55,7 +55,7 @@ const BrowsingProjects = props => {
                                     <Fragment key={idx}>{params.project_status === project.status ? (
                                         <div className="browsing-projects-item">
                                             <div onClick={() => onClickProject(idx)} className="project-cover">
-                                                <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}><img src={project.cover} alt="" /> <span>{project.qualidade.split("x")[1] + "p"}</span></Link>
+                                                <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}><img src={project.cover} alt="" /> <div><span className="project-quality">{project.classification + " " + project.qualidade.split("x")[1] + "p"}</span></div></Link>
                                             </div>
                                             <div onClick={() => onClickProject(idx)} className="project-info">
                                                 <Link to={`/project/${project._id}/${linkTextHandler(project.title)}`}>{project.title}</Link>

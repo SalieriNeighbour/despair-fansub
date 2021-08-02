@@ -39,6 +39,7 @@ const NovoProjeto = () => {
     const [project, setProject] = useState({
         title: '',
         synopsis: '',
+        classification: '',
         num_eps: '',
         year: '',
         cover: '',
@@ -58,7 +59,7 @@ const NovoProjeto = () => {
         status: 'em-andamento'
     });
 
-    const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = project;
+    const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = project;
 
     const onChange = e => {
         setProject({...project, [e.target.name]: e.target.value});
@@ -78,6 +79,7 @@ const NovoProjeto = () => {
         postProject({
             title,
             synopsis,
+            classification,
             num_eps,
             year,
             cover,
@@ -123,8 +125,8 @@ const NovoProjeto = () => {
                             </div>
                             <div className="side-items">
                                 <div className="form-item">
-                                    <label htmlFor="project-num-eps">Número de Episódios</label>
-                                    <input onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
+                                    <label htmlFor="project-classification">Tipo do Anime</label>
+                                    <input onChange={onChange} name="classification" id="project-classification" type="text" placeholder="Insira o tipo do anime. (ex: TV/Filme/Especial/OVA)" className="form-input" required />
                                 </div>
                                 <div className="form-item">
                                     <label htmlFor="project-year">Ano de Lançamento</label>
@@ -185,6 +187,10 @@ const NovoProjeto = () => {
                                 <label htmlFor="project-logo-creator">Logo Creator</label>
                                 <input onChange={onChange} name="logo_creator" id="project-logo-creator" type="text" placeholder="Insira o nome do logo creator do projeto. (opcional)" className="form-input"  />
                             </div>
+                        </div>
+                        <div className="form-item">
+                            <label htmlFor="project-num-eps">Número de Episódios</label>
+                            <input onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
                         </div>
                         <div className="state-input-radio">
                             <label htmlFor="project-status">Status do Projeto</label>

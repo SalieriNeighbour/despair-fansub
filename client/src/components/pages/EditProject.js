@@ -44,6 +44,7 @@ const EditProject = props => {
     const [project, setProject] = useState({
         title: '',
         synopsis: '',
+        classification: '',
         num_eps: '',
         year: '',
         cover: '',
@@ -68,6 +69,7 @@ const EditProject = props => {
             setProject({
                 title: project_info.title,
                 synopsis: project_info.synopsis,
+                classification: project_info.classification,
                 num_eps: project_info.num_eps,
                 year: project_info.year,
                 cover: project_info.cover,
@@ -91,7 +93,7 @@ const EditProject = props => {
         // eslint-disable-next-line
     }, [loading]);
 
-    const {title, synopsis, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = project;
+    const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = project;
 
     const onChange = e => {
         setProject({...project, [e.target.name]: e.target.value});
@@ -111,6 +113,7 @@ const EditProject = props => {
         editProject({
             title,
             synopsis,
+            classification,
             num_eps,
             year,
             cover,
@@ -157,8 +160,8 @@ const EditProject = props => {
                             </div>
                             <div className="side-items">
                                 <div className="form-item">
-                                    <label htmlFor="project-num-eps">Número de Episódios</label>
-                                    <input value={num_eps} onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
+                                    <label htmlFor="project-classification">Tipo do Anime</label>
+                                    <input value={classification} onChange={onChange} name="classification" id="project-classification" type="text" placeholder="Insira o tipo do anime. (ex: TV/Filme/Especial/OVA)" className="form-input" required />
                                 </div>
                                 <div className="form-item">
                                     <label htmlFor="project-year">Ano de Lançamento</label>
@@ -219,6 +222,10 @@ const EditProject = props => {
                                 <label htmlFor="project-logo-creator">Logo Creator</label>
                                 <input value={logo_creator} onChange={onChange} name="logo_creator" id="project-logo-creator" type="text" placeholder="Insira o nome do logo creator do projeto. (opcional)" className="form-input"  />
                             </div>
+                        </div>
+                        <div className="form-item">
+                            <label htmlFor="project-num-eps">Número de Episódios</label>
+                            <input value={num_eps} onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
                         </div>
                         <div className="state-input-radio">
                             <label htmlFor="project-status">Status do Projeto</label>
