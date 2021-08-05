@@ -38,7 +38,7 @@ router.post('/', auth, async (req, res) => {
     try {
         const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
-        if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
+        if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
             return res.status(400).send("Post inválido.");
         }
         
@@ -80,7 +80,7 @@ router.put('/:project_id', auth, async (req, res) => {
     try {
         const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
 
-        if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || encoder === '' || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
+        if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
             return res.status(400).send("Post inválido.");
         }
 
