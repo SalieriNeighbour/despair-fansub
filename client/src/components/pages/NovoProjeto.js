@@ -165,7 +165,7 @@ const NovoProjeto = () => {
                             </div>
                             <div className="form-item">
                                 <label htmlFor="project-encoder">Encoder</label>
-                                <input onChange={onChange} name="encoder" id="project-encoder" type="text" placeholder="Insira o nome do encoder do projeto. (opcional)" className="form-input" required />
+                                <input onChange={onChange} name="encoder" id="project-encoder" type="text" placeholder="Insira o nome do encoder do projeto. (opcional)" className="form-input" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="project-quality-checker">Quality Checker</label>

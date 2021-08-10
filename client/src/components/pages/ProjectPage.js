@@ -115,9 +115,9 @@ const ProjectPage = props => {
                                                         <img src={project_info.eps[key].print} alt="" />
                                                     </div>
                                                     <div className="body-info">
-                                                        <p>Source: {project_info.source}</p>
+                                                        <p>Fonte: {project_info.source}</p>
                                                         <p>Resolução: {project_info.qualidade}</p>
-                                                        <p>Codec: {project_info.video}</p>
+                                                        <p>Vídeo: {project_info.video}</p>
                                                         <p>Áudio: {project_info.audio}</p>
                                                         <div className="episode-link">
                                                             <p>Episódio:</p> <a href={project_info.eps[key].link} target="_blank" rel="noopener noreferrer">OneDrive</a>
