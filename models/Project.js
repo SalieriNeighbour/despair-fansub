@@ -77,6 +77,10 @@ const ProjectSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    batch_link: {
+        Type: String,
+        default: ''
+    },
     classification: {
         type: String,
         required: true

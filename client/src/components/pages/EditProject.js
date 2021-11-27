@@ -61,7 +61,8 @@ const EditProject = props => {
         timer: '',
         logo_creator: '',
         eps: {},
-        status: ''
+        status: '',
+        batch_link: ''
     });
 
     useEffect(() => {
@@ -86,14 +87,15 @@ const EditProject = props => {
                 timer: project_info.timer,
                 logo_creator: project_info.logo_creator,
                 eps: project_info.eps,
-                status: project_info.status
+                status: project_info.status,
+                batch_link: project_info.batch_link
             })
         }
 
         // eslint-disable-next-line
     }, [loading]);
 
-    const { title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status } = project;
+    const { title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status, batch_link } = project;
 
     const onChange = e => {
         setProject({ ...project, [e.target.name]: e.target.value });
@@ -130,7 +132,8 @@ const EditProject = props => {
             timer,
             logo_creator,
             eps,
-            status
+            status,
+            batch_link
         }, params.project_id);
         submitted.current = true;
         window.scrollTo(0, 0)
@@ -147,7 +150,7 @@ const EditProject = props => {
             <section className="novo-projeto" id="editar-projeto">
                 {!loading ? (
                     <div className="form-card">
-                        <h3>Criar Novo Projeto</h3>
+                        <h3>Editar Projeto</h3>
                         <form ref={projectFormRef} onSubmit={onSubmit} autoComplete="off" className="newpost-form">
                             <div className="form-item">
                                 <label htmlFor="project-title">Título</label>
@@ -226,6 +229,10 @@ const EditProject = props => {
                             <div className="form-item">
                                 <label htmlFor="project-num-eps">Número de Episódios</label>
                                 <input value={num_eps} onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
+                            </div>
+                            <div className="form-item">
+                                <label htmlFor="project-batch-link">Link da Batch Completa</label>
+                                <input value={batch_link} onChange={onChange} name="batch_link" id="project-batch-link" type="text" placeholder="Insira o link da batch com todos os episódios do anime." className="form-input" />
                             </div>
                             <div className="state-input-radio">
                                 <label htmlFor="project-status">Status do Projeto</label>

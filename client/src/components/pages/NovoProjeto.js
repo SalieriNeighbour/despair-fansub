@@ -56,10 +56,11 @@ const NovoProjeto = () => {
         timer: '',
         logo_creator: '',
         eps: {},
-        status: 'em-andamento'
+        status: 'em-andamento',
+        batch_link: ''
     });
 
-    const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = project;
+    const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status, batch_link} = project;
 
     const onChange = e => {
         setProject({...project, [e.target.name]: e.target.value});
@@ -96,7 +97,8 @@ const NovoProjeto = () => {
             timer,
             logo_creator,
             eps,
-            status
+            status,
+            batch_link
         });
         submitted.current = true;
         window.scrollTo(0, 0)
@@ -191,6 +193,10 @@ const NovoProjeto = () => {
                         <div className="form-item">
                             <label htmlFor="project-num-eps">Número de Episódios</label>
                             <input onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o número total de episódios do anime." className="form-input" required />
+                        </div>
+                        <div className="form-item">
+                            <label htmlFor="project-num-eps">Link da Batch Completa</label>
+                            <input onChange={onChange} name="num_eps" id="project-num-eps" type="text" placeholder="Insira o link da batch com todos os episódios do anime." className="form-input" />
                         </div>
                         <div className="state-input-radio">
                             <label htmlFor="project-status">Status do Projeto</label>

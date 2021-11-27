@@ -36,7 +36,7 @@ router.get('/:project_id', async (req, res) => {
 // Private
 router.post('/', auth, async (req, res) => {
     try {
-        const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
+        const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status, batch_link} = req.body;
 
         if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
             return res.status(400).send("Post inválido.");
@@ -62,7 +62,8 @@ router.post('/', auth, async (req, res) => {
             timer,
             logo_creator,
             eps,
-            status
+            status,
+            batch_link
         });
 
         await project.save();
@@ -78,7 +79,7 @@ router.post('/', auth, async (req, res) => {
 // Private
 router.put('/:project_id', auth, async (req, res) => {
     try {
-        const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status} = req.body;
+        const {title, synopsis, classification, num_eps, year, cover, qualidade, video, source, audio, tradutor, typesetter, encoder, quality_checker, karaoke, revisor, timer, logo_creator, eps, status, batch_link} = req.body;
 
         if (title === '' || synopsis === '' || classification === '' || tradutor === '' || typesetter === '' || eps === {} || year === '' || cover === '' || qualidade === '' || video === '' || audio === '' || cover.match(/\.(jpeg|jpg|png)$/) == null || (status !== 'em-andamento' && status !== 'concluidos')){
             return res.status(400).send("Post inválido.");
@@ -106,6 +107,7 @@ router.put('/:project_id', auth, async (req, res) => {
         project.logo_creator = logo_creator;
         project.eps = eps;
         project.status = status;
+        project.batch_link = batch_link
 
 
         await project.save();

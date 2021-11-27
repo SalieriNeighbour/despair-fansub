@@ -104,6 +104,9 @@ const ProjectPage = props => {
                                     ) : (<Fragment></Fragment>)}
                                 </div>
                                 <div className="project-content-section">
+                                    {project_info.batch_link ? (
+                                        <a href={project_info.batch_link}>Acesse o página com o download de todos os episódios!</a>
+                                    ) : <Fragment></Fragment>}
                                     {Object.keys(project_info.eps).map((key, idx) => {
                                         return(
                                             <div key={idx} className="project-episode-item">
