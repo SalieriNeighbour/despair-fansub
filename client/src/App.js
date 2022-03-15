@@ -6,6 +6,8 @@ import PrivateRoute from './components/routing/PrivateRoute';
 // Pages
 import AdminLogin from './components/pages/AdminLogin';
 import Home from './components/pages/Home';
+import FAQ from './components/pages/FAQ';
+import Doar from './components/pages/Doar';
 import Contato from './components/pages/Contato';
 import NovoPost from './components/pages/NovoPost';
 import EditPost from './components/pages/EditPost';
@@ -42,6 +44,8 @@ function App() {
                   <Route component={AdminLogin} exact path="/adminlogin" />
                   <Route component={BrowsingProjects} exact path="/browsingprojects/:project_status" />
                   <Route component={Home} exact path="/" />
+                  <Route component={FAQ} exact path="/perguntas-frequentes" />
+                  <Route component={Doar} exact path="/doar" />
                   <Route component={Contato} exact path="/contato" />
                   <Route component={Post} path="/post/:post_id" />
                   <Route component={BrowsingPage} path="/page/:page_id" />

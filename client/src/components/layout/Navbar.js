@@ -34,6 +34,8 @@ class NavbarHome extends React.Component {
                         <Link to="/">Home</Link>
                         <Link to="/browsingprojects/em-andamento">Projetos Em Andamento</Link>
                         <Link to="/browsingprojects/concluidos">Projetos Concluídos</Link>
+                        <Link to="/perguntas-frequentes">FAQ</Link>
+                        <Link to="/doar">Apoie-nos</Link>
                         <Link to="/contato">Contato</Link>
                     </div>
                 </div>
@@ -57,6 +59,12 @@ class NavbarHome extends React.Component {
                                     <Link to="/browsingprojects/concluidos">Concluídos</Link>
                                 </div>
                             </div>
+                        </div>
+                        <div className="nav-link">
+                            <Link to="/perguntas-frequentes">FAQ</Link>
+                        </div>
+                        <div className="nav-link">
+                            <Link to="/doar">Apoie-nos</Link>
                         </div>
                         <div className="nav-link">
                             <Link to="/contato">Contato</Link>
