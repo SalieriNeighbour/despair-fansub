@@ -31,7 +31,7 @@ const FAQ = () => {
                             <p>Encontrei um erro na legenda/o link do episódio está fora do ar, o que faço?</p>
                         </div>
                         <div className="faq-answer">
-                            <p>Avise-nos do problema, pelo meio que preferir: nosso Discord (preferência nossa), pelos comentários de um post ou por nossa aba de contato.<br />Independentemente do meio utilizado, nos comprometemos a corrigir o erro assim que possível.</p>
+                            <p>Avise-nos do problema, pelo meio que preferir: nosso <a href="https://discord.gg/utZWJya3Zz"  target="_blank" rel="noopener noreferrer">Discord</a> (preferência nossa), pelos comentários de um post ou por nossa aba de <Link to="/contato" className="">contato</Link>.<br />Independentemente do meio utilizado, nos comprometemos a corrigir o erro assim que possível.</p>
                         </div>
                     </div>
                     <div className="faq-item">
@@ -39,7 +39,7 @@ const FAQ = () => {
                             <p>Tem um anime que gostaria muito que fizessem, como posso sugeri-lo?</p>
                         </div>
                         <div className="faq-answer">
-                            <p>Pode-se sugeri-lo por meio de nosso Discord (preferência nossa) ou por outro meio que achar melhor.<br/>Avisamos de antemão que desejamos fazer somente projetos que não foram feitos em português ou não existem em português em boa qualidade/na melhor qualidade disponível. Assim, pedimos que pesquise se o anime que deseja se encaixa em algum desses critérios antes de enviar sua sugestão. Dois sites bons para descobrir isso são o <a href="infoanime.com.br/">Info Anime</a> e o <a href="https://anidb.net/">AniDB</a>.</p>
+                            <p>Pode-se sugeri-lo por meio de nosso <a href="https://discord.gg/utZWJya3Zz"  target="_blank" rel="noopener noreferrer">Discord</a> (preferência nossa) ou por outro meio que achar melhor.<br/>Avisamos de antemão que desejamos fazer somente projetos que não foram feitos em português ou não existem em português em boa qualidade/na melhor qualidade disponível. Assim, pedimos que pesquise se o anime que deseja se encaixa em algum desses critérios antes de enviar sua sugestão. Dois sites bons para descobrir isso são o <a href="https://infoanime.com.br/"  target="_blank" rel="noopener noreferrer">Info Anime</a> e o <a href="https://anidb.net/"  target="_blank" rel="noopener noreferrer">AniDB</a>.</p>
                         </div>
                     </div>
                     <div className="faq-item">
@@ -55,7 +55,7 @@ const FAQ = () => {
                             <p>Tenho interesse em participar da fansub, o que faço?</p>
                         </div>
                         <div className="faq-answer">
-                            <p>Estamos sempre dispostos a aceitar novas pessoas que desejam contribuir em nossos projetos.<br/>Fale conosco por meio de nosso Discord ou por nossa aba de contato, que poderemos trocar uma ideia.</p>
+                            <p>Estamos sempre dispostos a aceitar novas pessoas que desejam contribuir em nossos projetos.<br/>Fale conosco por meio de nosso <a href="https://discord.gg/utZWJya3Zz"  target="_blank" rel="noopener noreferrer">Discord</a> ou por nossa aba de <Link to="/contato" className="">contato</Link>, que poderemos trocar uma ideia.</p>
                         </div>
                     </div>
                 </div>
