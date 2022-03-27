@@ -7,7 +7,7 @@ const Footer = () => {
             <p>Site por Salieri</p>
             <div className="footer-icons">
                 <a href="https://twitter.com/despairfansub"  target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
-                <a href="https://discord.gg/M9pEhPWWkN"  target="_blank" rel="noopener noreferrer"><i className="fab fa-discord"></i></a>
+                <a href="https://discord.gg/utZWJya3Zz"  target="_blank" rel="noopener noreferrer"><i className="fab fa-discord"></i></a>
             </div>
         </footer>
     );
