@@ -272,9 +272,18 @@ a {
   margin-top: 0.8rem;
 }
 
+.footer-icons a {
+  margin-left: 0.5rem;
+}
+
 .footer-icons .fa-twitter {
   color: rgb(29, 161, 242);
   font-size: 1.7rem;
+}
+
+.footer-icons .fa-discord {
+  color: rgb(245, 245, 245);
+  font-size: 1.6rem;
 }
 
 /* Login */
