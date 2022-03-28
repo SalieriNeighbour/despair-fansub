@@ -1371,11 +1371,14 @@ a {
   font-size: 1.5rem;
   font-weight: bold;
   border-bottom: 3px solid var(--palette-red1);
+  margin-bottom: 2rem;
 }
 
 .donation-list p {
   margin-top: 1rem;
-  font-style: italic;
+  font-size: 1.1rem;
+  border-left: 3px solid var(--palette-red1);
+  padding-left : 0.8rem;
 }
 
 .donation-methods {

@@ -16,7 +16,8 @@ const Doar = () => {
                     <div className="donation">
                         <div className="donation-list">
                             <h5>Lista de Contribuidores</h5>
-                            <p>Ainda não há contribuidores. Seja o primeiro!</p>
+                            <p> Litch - R$ 10,00 (27/03/22)</p>
+                            <p> Doação Anônima - R$ 10,00 (27/03/22)</p>
                         </div>
                         <div className="donation-methods">
                             <div className="donate-card">
