@@ -23,7 +23,7 @@ const FAQ = () => {
                             <p>Por que o vídeo/legenda não está funcionando?</p>
                         </div>
                         <div className="faq-answer">
-                            <p>Não são todos os reprodutores de vídeo que conseguem rodar os arquivos de vídeo que disponibilizamos.<br />Nós recomendamos o uso dos players MPC-HC ou MPV para computadores e do VLC Player para dispositivos mobile, uma vez que são os utilizados por nós.</p>
+                            <p>Não são todos os reprodutores de vídeo que conseguem rodar os arquivos de vídeo que disponibilizamos.<br />Para computadores, nós recomendamos o uso do player <a href="https://codecguide.com/download_k-lite_codec_pack_standard.htm"  target="_blank" rel="noopener noreferrer">MPC-HC com K-Lite Codec Pack</a> (clique em um dos 3 "Server" para baixar). Para dispositivos mobile, recomendamos que use o VLC Player. Recomendamos estes pois são os mesmos utilizados por nós.</p>
                         </div>
                     </div>
                     <div className="faq-item">
